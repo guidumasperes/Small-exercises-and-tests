@@ -1,17 +1,30 @@
 #include<stdio.h>
 
 int main (void) {
-	int n, v1[n], v2[n], i;
-	printf("Digite o tamanho do vetor: ");
-	scanf("%i", &n);
-	printf("Digite a sequencia de numeros: ");
-	for(i = 0; i < n; i++) {
-		scanf("%i", &v1[i]);
-	}
-	for(i = 0; i < n; i++) {
-		if(v1[i] < v1[i + 1]) {
-			printf("%i ", v1[i]);	
+	int num = 0, ant = 0, max = 0, cnt = 0;
+	
+	while(num >= 0) {
+		scanf("%d", &num);
+		if(num >= ant) {
+			ant = num;
+			cnt++;
+		} else if(num < ant && num >= 0) {
+			if(max < cnt) {
+				max = cnt;
+			}
+			cnt = 0;
+			ant = 0;
+		} else {
+			if(max > cnt) {
+				goto final;
+			} else {
+				max = cnt;
+				goto final;
+			} 
 		}
 	}
+	final:
+	printf("A maior subsequencia e: %d\n", max);
 	return 0;
 }
+
